@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Fetch Sample</title>
+</head>
+
+<body>
+
+    <h1>JavaScript Fetch Sample</h1>
+
+    <form id="form">
+        <h2>First Name</h2>
+        <input type="text" id="firstname">
+        <h2>Last Name</h2>
+        <input type="text" id="lastname">
+        <button type="button" name="button" onclick="getHello()">Submit</button>
+    </form>
+    <br>
+    <div id="output"></div>
+    <script type="text/javascript">
+    function getHello() {
+        let data = new FormData()
+        data.append('firstname', document.getElementById('firstname').value)
+        data.append('lastname', document.getElementById('lastname').value)
+        fetch("/hello", {"method": "POST", "body": data})
+            .then(response => response.json())  
+            .then(json => {
+                console.log(json);
+                document.getElementById("output").innerText = JSON.stringify(json.output)
+        })
+    }
+    </script>
+    
+</body>
+</html>
